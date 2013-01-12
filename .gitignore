@@ -170,7 +170,7 @@ pip-log.txt
 *.log
 *.glo
 *.hd
-*.idx
+*.idxs
 *.toc
 *.idx
 *.out
