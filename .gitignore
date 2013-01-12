@@ -166,4 +166,5 @@ pip-log.txt
 # LaTeX
 
 *.gz
+*.log
 
