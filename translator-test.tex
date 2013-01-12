@@ -1,0 +1,72 @@
+%% The article class
+\documentclass[oneside]{book}
+\usepackage[paperwidth=4.75in,paperheight=7.25in,
+            textwidth=4.5in,textheight=6.5in,
+            headsep=0.1in, footskip=0.15in,
+            marginratio=1:1]{geometry}
+\usepackage[dutch,greek,english]{babel}
+\usepackage{filecontents,xspace}
+\usepackage{translator}
+
+%% just to allow filenames to be changed easily
+\def\fname{mothererror}
+
+%% The Greek dictionary file
+\begin{filecontents*}{\fname-Greek.dict}
+\ProvidesDictionary{\fname}{Greek}
+\providetranslation{mother}{mht`era `olwn t`wn laj`wn}
+\providetranslation{Error}{L`ajos}
+\providetranslation{Errors}{L`ajh}
+\end{filecontents*}
+
+%% The Dutch dictionary file
+\begin{filecontents*}{\fname-Dutch.dict}
+\ProvidesDictionary{\fname}{Dutch}
+\providetranslation{mother}{moeder van alle fouten}
+\providetranslation{error}{fout}
+\providetranslation{Error}{Fout}
+\providetranslation{Errors}{Fouten}
+\end{filecontents*}
+
+%% The English dictionary file
+\begin{filecontents*}{\fname-English.dict}
+\ProvidesDictionary{\fname}{English}
+\providetranslation{mother}{mother of all errors}
+\providetranslation{error}{error}
+\providetranslation{Error}{Error}
+\providetranslation{Errors}{Errors}
+\end{filecontents*}
+
+%% The package file mothererror.sty
+%% internationlizes mother of all errors!
+\begin{filecontents*}{\fname.sty}
+%% Now declare what environment we need:
+\NeedsTeXFormat{LaTeX2e}[1994/12/01]
+%% Load the translator package
+\RequirePackage{translator}
+\usedictionary{\fname}
+%% create a test error for package
+\def\geterror#1{\translate{Error} #1 : 
+\ifcase #1\or 
+    1 A general error\or
+    \ldots\translate{mother}\xspace\or
+ \fi}
+\end{filecontents*}
+
+%% Load the package we just saved
+\usepackage{\fname}
+\uselanguage{dutch,greek,english}
+\begin{document}
+%% Dutch
+\selectlanguage{dutch}
+\chapter{\translate{Errors}}
+Dutch: \geterror{2}, \today
+%% English
+\selectlanguage{english}
+\chapter{Errors}
+English: \geterror{2},  \today
+%% Greek
+\selectlanguage{greek}
+\chapter{\translate{Errors}}
+Ellhnik'a: \geterror{2} \today
+\end{document}
