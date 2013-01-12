@@ -12,5 +12,7 @@ See [LaTeX license](http://www.latex-project.org/lppl.txt)
 This file provides a package for overlaying the page geometry in a document.
 
 
+<img href="https://github.com/yannisl/xlayouts/blob/master/images/hine01.jpg"/>
+
 
 
