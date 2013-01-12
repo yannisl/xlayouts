@@ -11,8 +11,10 @@ See [LaTeX license](http://www.latex-project.org/lppl.txt)
 
 This file provides a package for overlaying the page geometry in a document.
 
+The examples use photographs from Hine.
 
-<img src="https://raw.github.com/yannisl/xlayouts/master/images/hine01.jpg" style="width:3.5cm;margin:0 auto" />
-
+<div style="width:50%">
+<img src="https://raw.github.com/yannisl/xlayouts/master/images/hine01.jpg" style="width:90%;" />
+</div>
 
 
