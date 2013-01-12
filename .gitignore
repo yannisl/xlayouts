@@ -166,5 +166,18 @@ pip-log.txt
 # LaTeX
 
 *.gz
+*.aux
 *.log
+*.glo
+*.hd
+*.idx
+*.toc
+*.idx
+*.out
+
+
+
+
+
+
 
