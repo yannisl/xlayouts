@@ -138,8 +138,8 @@
    \setlength\shifty@cx\pgf@y}
 \newcommand\CS[1]{\footnotesize #1}
 \newcommand\labelit@cx[1]{\ttfamily\CS{\string#1} \convert@cx{#1}}
-\newcommand\cxset{\pgfqkeys{/xlayouts}} %Notice this is pgf q keys
 
+\newcommand\cxset{\pgfqkeys{/xlayouts}} %Notice this is pgf q keys
 \cxset{geometry units/.code=\printinunitsof@cx{#1},
           geometry grid color/.store in=\geometrygridcolor@cx,
           geometry lines color/.store in=\geometrylinescolor@cx,
@@ -384,7 +384,7 @@
 
 \tikzset{typearea/.style={color=black!85,fill=black!80,
          font={\sffamily\bfseries}}}
-\def\drawspread{%
+\def\drawcanons{%
   \begin{tikzpicture}[scale=\spreadscale@cx]
    % draw the two pages
   \draw[xstep=(\paperwidth@cx)/\spreadxsteps@cx,

@@ -22,7 +22,6 @@ add paragraphs
 add figures
 add toc etc.
 change ltxdoc  -> ltxdocbook
-add standalone examples to generate diagrams
 %</TODO>
 %<*internal>
 \fi
@@ -293,7 +292,7 @@ and the derived files          xlayouts.ins,
 %
 %   Sometimes it is instructive to view your own document in a two
 %   page view. This is probably easy with a viewer such as Acrobat Reader,
-%   but not so easy to save them on paper. We offer a facility to do this in
+%   but not so easy to print them on paper. We offer a facility to do this in
 %   the macros that follow:
 %
 % \begin{figure}[htbp]
@@ -424,6 +423,10 @@ and the derived files          xlayouts.ins,
 %
 %	\subsection{New lengths and switches}
 %	We need a few new lengths for arranging the grid and the layout.
+%  |PH| = paper height 
+%  |PW| = paper width
+%  |tol|=tolerance
+%  |toly| = ytolerance
 %    \begin{macrocode}
 \newlength\shiftx@cx
 \newlength\shifty@cx
@@ -440,7 +443,12 @@ and the derived files          xlayouts.ins,
 %    \end{macrocode}
 %
 %   \subsection{Colors}
-%    \begin{macrocode}
+%	 One of the reasons that I have created the package is to provide
+%   better looking layouts to be included in tutorials and or books, as
+%   such we define a number of colors to make it easy for users to redefine
+%   and change the looks.
+%
+%    \begin{macrocode} 
 \definecolor{theblue} {rgb}{0.02,0.04,0.48}
 \definecolor{thered}  {rgb}{0.65,0.04,0.07}
 \definecolor{thegreen}{rgb}{0.06,0.44,0.08}
@@ -480,7 +488,7 @@ and the derived files          xlayouts.ins,
 
 %    \end{macrocode}
 % \begin{macro}{\printunitsof@cx}
-%	This macro has been adapted from the layouts package, it sets the units to be printed
+%	This macro has been adapted from the |layouts| package, it sets the units to be printed
 % 	in the diagrams.
 %    \begin{macrocode}
 \newcommand{\printinunitsof@cx}[1]{%
@@ -568,15 +576,17 @@ and the derived files          xlayouts.ins,
 \newcommand\labelit@cx[1]{\ttfamily\CS{\string#1} \convert@cx{#1}}
 %    \end{macrocode}
 % \end{macro}
+
 %	We define its own family of keys.
-%	\pgfkeys{/xlayouts/.is family}       !TODO A CHECK HERE
+%	\pgfkeys{/xlayouts/.is family}       
 % \begin{macro}{\cxset}
 %	The macro |\cxset| is used to either define a new key or set an existing one.
 %    \begin{macrocode}
 \newcommand\cxset{\pgfqkeys{/xlayouts}} %Notice this is pgf q keys
 %    \end{macrocode}
 % \end{macro}
-
+%
+% \subsection{Keys}
 %	We are now ready to start defining keys. We use PGF Keys to
 %  define the keys.
 %    \begin{macrocode}
@@ -736,8 +746,9 @@ and the derived files          xlayouts.ins,
 %
 %	A two column document, just subdivides the text area into two equal parts with
 %	a gutter in between.
-%	Next we draw the vertical lines and the dimensions for two column layouts. We detect if it is
-%	a twocolumn layout using the switch |\if@twocolumn| defined by the standard classes.
+%	Next we draw the vertical lines and the dimensions for two column layouts. 
+%  We detect if it is a twocolumn layout using the switch |\if@twocolumn| 
+%  defined by the standard classes in |source2e|.
 %
 % \begin{macro}{\columnwidth}
 % \begin{macro}{\columnsep}
@@ -795,8 +806,8 @@ and the derived files          xlayouts.ins,
 %	\subsection{headheight and headsep}
 %
 %	The |\headheight| is normally a fixed amount that varies with the baseline
-%   of the the font. In the standard classes it is defined in the |.clo| files.
-%   We position the lines and labels
+%  of the the font. In the standard classes it is defined in the |.clo| files.
+%  We position the lines and labels
 %	on the right for odd pages and on the left for even pages.
 %
 %    \begin{macrocode}
@@ -828,7 +839,7 @@ and the derived files          xlayouts.ins,
 %
 %	\subsection{The footskip}
 %
-%	The footskip is also a fixed number set by the classes. We position it
+%	The |\footskip| is also a fixed number set by the classes. We position it
 %   left or right to minimize clashes with other elements.
 %
 %    \begin{macrocode}
@@ -1033,12 +1044,12 @@ and the derived files          xlayouts.ins,
 %
 %    \end{macrocode}
 %
-% \begin{macro}{\drawspread}
-%   The macro |\drawspread| draws a spread, showing all lines and divisions
+% \begin{macro}{\drawcanons}
+%   The macro |\drawcanons| draws a spread, showing all lines and divisions
 %   as per classical rules.
 %
 %    \begin{macrocode}
-\def\drawspread{%
+\def\drawcanons{%
   \begin{tikzpicture}[scale=\spreadscale@cx]
    % draw the two pages
   \draw[xstep=(\paperwidth@cx)/\spreadxsteps@cx,
@@ -2295,7 +2306,7 @@ This has been drawn using TikZ\footnote{A kleine program.}\footnote{Another foot
 \onecolumn
 %   draws the spread
 
-\drawspread
+\drawcanons
 
 \printreadability
 \pagestyle{plain}
@@ -2381,7 +2392,7 @@ This has been drawn using TikZ\footnote{A kleine program.}\footnote{Another foot
 \clearpage
 \onecolumn
 %   draws the spread
-\drawspread
+\drawcanons
 
 \printreadability
 \pagestyle{plain}
@@ -2420,7 +2431,7 @@ This has been drawn using TikZ\footnote{A kleine program.}\footnote{Another foot
 \usepackage[italian]{babel}
 \usepackage[italian]{xlayouts}
 \begin{document}
-\drawspread
+\drawcanons
 \end{document}
 %    \end{macrocode}
 %</test-04>
