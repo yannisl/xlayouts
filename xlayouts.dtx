@@ -670,10 +670,10 @@ and the derived files          xlayouts.ins,
 %	We will first draw the grid. This is one of the main features of the package. We do this
 %	using the |grid| shape.
 %	All |\draw| commands are detailed, rather than using coordinates. This was both for me
-%	as well as future maintainers that can follow easier the steps in drawing the layout.
+%	as well as future maintainers that can follow easier the steps in drawing the layout. TODO option to skip the grid
 %    \begin{macrocode}
 %
-  \draw [grid,xstep=\PW/\xsteps@cx,ystep=\PH/\ysteps@cx]
+  \draw [grid, xstep=\PW/\xsteps@cx,ystep=\PH/\ysteps@cx]
             (current page.south west) grid ++(\PW,\PH);
 %    \end{macrocode}
 %
