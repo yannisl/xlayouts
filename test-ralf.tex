@@ -1,0 +1,44 @@
+
+
+%% This file is generated automatically by xlayouts.dtx.
+%% It produces a two page spread and shows the dimensions.
+%%
+\documentclass{book}
+\usepackage[left=80pt,right=80pt,top=0.75in]{geometry}
+\usepackage[final]{graphicx}
+\usepackage{lipsum,  ifoddpage}
+\usepackage{xlayouts}
+\makeatletter
+\providecommand{\cleartoevenpage}[1][\@empty]{%
+ \clearpage%
+ \ifodd\c@page\null#1\clearpage\fi}
+\makeatother
+
+\pagestyle{grid}
+\parindent0pt
+\begin{document}
+\mainmatter
+\null\newpage
+
+\pgfpagesuselayout{2 on 1}[a3paper,landscape,border shrink=0mm]
+
+%% first page
+\cleartoevenpage
+
+\checkoddpage%
+{%
+\vbox to 120pt{\lipsum[1]}%
+\includegraphics[height=0.8\textheight]{./images/ralf-goings}}%
+
+%%secondpage
+{\parindent0pt
+\vbox to 120pt{\lipsum[1]}%
+\hspace*{\dimexpr(-2in-\textwidth-2\evensidemargin-3pt)}
+\includegraphics[height=0.8\textheight]{./images/ralf-goings}}.
+\hfill\parbox[b]{0.57\textwidth}{%
+\section*{\hfill RALF GOINGS \hfill\hfill}%
+\lipsum[1-3]}
+\end{document}
+
+
+
