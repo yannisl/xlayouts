@@ -4,11 +4,11 @@
 \iffalse
 %</internal>
 %<*readme>
-## The xlayouts LaTeX Package
+## The xlayouts LaTeX Package 
 
 The xlayouts package provides commands for typesetting
 the layout of a page and some ancillary commands.
-E-mail: yannislaz at gmail.com
+E-mail: yannislaz at gmail.com.
 
 ### Licence
 
@@ -338,8 +338,11 @@ and the derived files          xlayouts.ins,
 %  |\@declaredcolor|, |\current@color|, |\set@color|, |\set@page@color|
 %
 %    \begin{macrocode}
-\IfFileExists{color.sty}{%
-    \RequirePackage{color}%
+
+\global\let\tikz@ensure@dollar@catcode=\relax %supress error with verbatim
+
+\IfFileExists{xcolor.sty}{%
+    \RequirePackage{xcolor}%
     \let\needscolor@cx\@empty
 }{}
 \RequirePackage{fp}
@@ -351,7 +354,6 @@ and the derived files          xlayouts.ins,
 % an odd or even page.
 %
 %     \begin{macrocode}
-%\IfFileExists{changepage.sty}{%
     \RequirePackage{xcolor}
 %    \end{macrocode}
 %
@@ -367,9 +369,9 @@ and the derived files          xlayouts.ins,
 %    \begin{macrocode}
 \RequirePackage{changepage}
 \RequirePackage{pgf}
-\RequirePackage{pgfpages}
 \RequirePackage{tikz}
 \RequirePackage{amsmath}
+\RequirePackage{pgfpages}
 \RequirePackage{fancyhdr}
 %    \end{macrocode}
 
@@ -407,7 +409,7 @@ and the derived files          xlayouts.ins,
 \IfFileExists{translator.sty}
       {\RequirePackage{translator}\typeout{Translator package loaded.}}{}
 }%
-{\RequirePackage[french,dutch,german,italian,english]{babel}
+{\RequirePackage[french,dutch,italian,english]{babel}
 \IfFileExists{translator.sty}
       {\RequirePackage{translator}\typeout{Translator package loaded.}}{}}
 
@@ -583,7 +585,9 @@ and the derived files          xlayouts.ins,
 % \begin{macro}{\cxset}
 %	The macro |\cxset| is used to either define a new key or set an existing one.
 %    \begin{macrocode}
-\newcommand\cxset{\pgfqkeys{/xlayouts}} %Notice this is pgf q keys
+\@ifundefined{cxset}{%
+   \newcommand\cxset{\pgfqkeys{/phd}
+}}{} %Notice this is pgf q keys
 %    \end{macrocode}
 % \end{macro}
 %
@@ -737,7 +741,7 @@ and the derived files          xlayouts.ins,
 %    \begin{macrocode}
  \draw [lines](0,\PH-1in-\topmargin)-- ++(\PW,0);
  \draw [lines](0,\PH-1in-\topmargin-\headheight)-- ++(\PW,0)
-   node[black,above] at ++(-0.5\PW,0){Page \thepage};
+      node[black,above] at ++(-0.5\PW,0){Page \thepage};
  \draw [lines](0,\TOP) -- ++(\PW,0);
  \draw [lines](0,\TOP-\textheight) -- ++(\PW,0);
  \draw [lines](0,\TOP-\textheight-\footskip) -- ++(\PW,0);
@@ -1217,15 +1221,20 @@ and the derived files          xlayouts.ins,
 %    \end{macrocode}
 % \begin{macro}{\printreadability}
 %    \begin{macrocode}
+\edef\tempbaseline{\the\baselineskip}
 \def\printreadability{%
 \begin{tabular}{lr}
   Characters per line &\charactersperline\\
   Alphabets per line &\alphabetsperline\\
   Alphabet length &\alphabetlength\\
-  Baselineskip & \the\baselineskip\\
+  Baselineskip & \tempbaseline\\
   Number of text lines &\numbertextlines\\
 \end{tabular}}
+
 %    \end{macrocode}
+% This produces
+%
+% \printreadability
 % \end{macro}
 %
 %   \section{Page Layout Diagrams}

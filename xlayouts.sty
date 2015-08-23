@@ -16,8 +16,11 @@
 \ProvidesPackage{xlayouts}[2012/26/03 v1.0 Overlays page geometry in a document]
 
 
-\IfFileExists{color.sty}{%
-    \RequirePackage{color}%
+
+\global\let\tikz@ensure@dollar@catcode=\relax %supress error with verbatim
+
+\IfFileExists{xcolor.sty}{%
+    \RequirePackage{xcolor}%
     \let\needscolor@cx\@empty
 }{}
 \RequirePackage{fp}
@@ -25,9 +28,9 @@
 
 \RequirePackage{changepage}
 \RequirePackage{pgf}
-\RequirePackage{pgfpages}
 \RequirePackage{tikz}
 \RequirePackage{amsmath}
+\RequirePackage{pgfpages}
 \RequirePackage{fancyhdr}
 
 
@@ -35,7 +38,7 @@
 \IfFileExists{translator.sty}
       {\RequirePackage{translator}\typeout{Translator package loaded.}}{}
 }%
-{\RequirePackage[french,dutch,german,italian,english]{babel}
+{\RequirePackage[french,dutch,italian,english]{babel}
 \IfFileExists{translator.sty}
       {\RequirePackage{translator}\typeout{Translator package loaded.}}{}}
 
@@ -139,7 +142,9 @@
 \newcommand\CS[1]{\footnotesize #1}
 \newcommand\labelit@cx[1]{\ttfamily\CS{\string#1} \convert@cx{#1}}
 
-\newcommand\cxset{\pgfqkeys{/xlayouts}} %Notice this is pgf q keys
+\@ifundefined{cxset}{%
+   \newcommand\cxset{\pgfqkeys{/phd}
+}}{} %Notice this is pgf q keys
 \cxset{geometry units/.code=\printinunitsof@cx{#1},
           geometry grid color/.store in=\geometrygridcolor@cx,
           geometry lines color/.store in=\geometrylinescolor@cx,
@@ -212,7 +217,7 @@
  \fi
  \draw [lines](0,\PH-1in-\topmargin)-- ++(\PW,0);
  \draw [lines](0,\PH-1in-\topmargin-\headheight)-- ++(\PW,0)
-   node[black,above] at ++(-0.5\PW,0){Page \thepage};
+      node[black,above] at ++(-0.5\PW,0){Page \thepage};
  \draw [lines](0,\TOP) -- ++(\PW,0);
  \draw [lines](0,\TOP-\textheight) -- ++(\PW,0);
  \draw [lines](0,\TOP-\textheight-\footskip) -- ++(\PW,0);
@@ -473,14 +478,16 @@
 \newcommand\numbertextlines{%
    \pgfmathparse{(\textheight-\topskip)/(12)-1}\pgfmathresult
 }
+\edef\tempbaseline{\the\baselineskip}
 \def\printreadability{%
 \begin{tabular}{lr}
   Characters per line &\charactersperline\\
   Alphabets per line &\alphabetsperline\\
   Alphabet length &\alphabetlength\\
-  Baselineskip & \the\baselineskip\\
+  Baselineskip & \tempbaseline\\
   Number of text lines &\numbertextlines\\
 \end{tabular}}
+
 \newlength\trypaperwidth@cx
 \newlength\trypaperheight@cx
 \newlength\trytextheight@cx

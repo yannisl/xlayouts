@@ -2,7 +2,7 @@
 
 The xlayouts package provides commands for typesetting
 the layout of a page and some ancillary commands.
-E-mail: yannislaz at gmail.com
+E-mail: yannislaz at gmail.com.
 
 ### Licence
 
